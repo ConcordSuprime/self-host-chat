@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	rs := service.NewRoomService(50, 30*time.Second) // последние 50 сообщений, таймаут 30 секунд
+	rs := service.NewRoomService(50, 30*time.Second)
 	cs := service.NewChatService(rs)
 	server := infrastructure.NewTCPServer(":9000", rs, cs)
 

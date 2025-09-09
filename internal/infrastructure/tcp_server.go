@@ -70,14 +70,12 @@ func (s *TCPServer) handleConnection(conn net.Conn) {
 	client := &domain.Client{Conn: conn, Name: name}
 	s.RoomService.AddClient(roomID, client)
 
-	// Отправка последних сообщений
 	if room, ok := s.RoomService.GetRoom(roomID); ok {
 		for _, msg := range room.Messages {
 			conn.Write([]byte(fmt.Sprintf("%s: %s\n", msg.Sender, msg.Content)))
 		}
 	}
 
-	// Сообщение о подключении
 	s.ChatService.SendSystemMessage(roomID, fmt.Sprintf("[Система] %s подключился\n", name))
 
 	for {

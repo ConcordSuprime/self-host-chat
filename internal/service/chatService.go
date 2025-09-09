@@ -25,13 +25,11 @@ func (cs *ChatService) SendMessage(roomID, sender, content string) {
 		return
 	}
 
-	// Добавляем сообщение в историю
 	room.Messages = append(room.Messages, domain.Message{Sender: sender, Content: content})
 	if len(room.Messages) > cs.roomService.MessageLimit {
 		room.Messages = room.Messages[len(room.Messages)-cs.roomService.MessageLimit:]
 	}
 
-	// Рассылка всем клиентам кроме отправителя
 	for _, client := range room.Clients {
 		if client.Name != sender {
 			client.Conn.Write([]byte(fmt.Sprintf("%s: %s\n", sender, content)))
@@ -39,7 +37,6 @@ func (cs *ChatService) SendMessage(roomID, sender, content string) {
 	}
 }
 
-// Системные сообщения
 func (cs *ChatService) SendSystemMessage(roomID, message string) {
 	cs.mu.Lock()
 	defer cs.mu.Unlock()
