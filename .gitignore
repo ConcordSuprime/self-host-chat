@@ -1,0 +1,36 @@
+# Сборочные артефакты Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Кэш и временные файлы Go
+*.log
+*.tmp
+*.temp
+
+# Папка, где Go хранит зависимости
+/vendor/
+/bin/
+/build/
+/dist/
+
+# IDE/Editor файлы
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS файлы
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+
+# Если будет использоваться GoLand или JetBrains
+*.iml
